@@ -1,6 +1,6 @@
-﻿using System.Text;
+using System.Text;
 
-const string filePath = @"/Users/georgearnall/source/AdventOfCode/Day1/input.txt";
+const string filePath = @"input.txt";
 var lines = File.ReadLines(filePath, Encoding.UTF8);
 
 var elfCalories = new List<int>();
