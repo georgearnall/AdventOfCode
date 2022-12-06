@@ -20,19 +20,14 @@ int Part1() => lines.Select(line =>
     return compartment1.Intersect(compartment2).Single();
 }).Sum();
 
-int Part2() => GroupIntoThrees(lines.Select(ConvertToPriorities))
-    .Select(priorities =>
-    {
-        // Find Common Priority
-        return priorities[0]
-            .Intersect(priorities[1])
-            .Intersect(priorities[2])
-            .Single();
-    }).Sum();
-
-IEnumerable<int[][]> GroupIntoThrees(IEnumerable<int[]> l) => l.Select((value, index) => new { PairNum = index / 3, value })
-    .GroupBy(pair => pair.PairNum)
-    .Select(grp => grp.Select(g => g.value).ToArray()).ToArray();
+int Part2() => lines
+    .Select(ConvertToPriorities)
+    .Chunk(3)
+    .Select(priorities => priorities[0]
+        .Intersect(priorities[1])
+        .Intersect(priorities[2])
+        .Single())
+    .Sum();
 
 int[] ConvertToPriorities(string bag)
 {
